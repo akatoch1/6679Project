@@ -14,22 +14,22 @@ int main(int argc, char**argv) {
     b = atoi(argv[2]);
     
     // Initialize host variables
-    double* xB_h = (double*) malloc( sizeof(double)*m );
-    for (unsigned int i=0; i < m; i++) { xB_h[i] = n+1+i; }
+    double* xB_h = (double*) malloc( sizeof(double)*m ); // index's of the variables in the Basis.
+    for (unsigned int i=0; i < m; i++) { xB_h[i] = n+i; }
 
-    double* xN_h = (double*) malloc( sizeof(double)*n );
-    for (unsigned int i=0; i < n; i++) { xB_h[i] = i+1; }
+    double* xN_h = (double*) malloc( sizeof(double)*n ); // index's of the variables not in the Basis.
+    for (unsigned int i=0; i < n; i++) { xB_h[i] = i; }
 
-    double* cB_h = (double*) malloc( sizeof(double)*m );
+    double* cB_h = (double*) malloc( sizeof(double)*m ); // C values for the basic variables
     for (unsigned int i=0; i < m; i++) { cB_h[i] = 0; }
 
-    double* cN_h = (double*) malloc( sizeof(double)*n );
+    double* cN_h = (double*) malloc( sizeof(double)*n ); // C values for the non-basic variables
     for (unsigned int i=0; i < n; i++) { cN_h[i] = (rand()%10-5); }
 
-    double* b_h = (double*) malloc( sizeof(double)*m );
+    double* b_h = (double*) malloc( sizeof(double)*m ); // Right hand side values 
     for (unsigned int i=0; i < m; i++) { b_h[i] = rand()%b; }
 
-    double* B_h = (double*) malloc( sizeof(double)*m*m );
+    double* B_h = (double*) malloc( sizeof(double)*m*m ); // Constraint coefficents of basic variables
     for (unsigned int i=0; i < m; i++) { 
         for (unsigned int j=0; j < m; j++) { 
             if (i==j) {
@@ -40,26 +40,26 @@ int main(int argc, char**argv) {
         }
     }
 
-    double* N_h = (double*) malloc( sizeof(double)*m*n );
+    double* N_h = (double*) malloc( sizeof(double)*m*n ); // Constraint coefficents of non-basic variables
     for (unsigned int i=0; i < m; i++) { 
         for (unsigned int j=0; j < n; j++) { 
             B_h[i][j] = (rand()%10-5);
         }
     }
 
-    double* tab_h = (double*) malloc( sizeof(double)*(m+1)*(n+1));
+    double* tab_h = (double*) malloc( sizeof(double)*(m+1)*(n+1)); // Simplex tableau
     // Assign vals for 0,0
     // Assign vals for m,0
     // Assign vals for 0,n
     // Assign vals for m,n
 
-    double* objLine_h = (double*) malloc( sizeof(double)*n);
+    double* objLine_h = (double*) malloc( sizeof(double)*n); // Objective line used to determine k
 
     int* k_h = malloc(sizeof(int));
     
     int* r_h = malloc(sizeof(int));
 
-    double* theta_h = (double*) malloc( sizeof(double)*(m+1));
+    double* theta_h = (double*) malloc( sizeof(double)*(m+1)); // Ratio of right-hand side to k row
 
     // Allocate device variables
     double* tab_d;
@@ -97,10 +97,11 @@ int main(int argc, char**argv) {
     cuda_ret = cudaMemcpy(xB_d, xB_h, sizeof(double)*m, cudaMemcpyHostToDevice);
 	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 
-    // Iterate until optimal is found
-
+    // Iterate until optimal or infeasible/unbounded is found
+    bool continueVar = True;
+    while (contunueVar == True) {
         // Copy first line of the Simplex tableau to host
-        for (unsigned int i=0; i < m; i++) {objLine_d[i]= s_d[0][i+1] ;}
+        for (unsigned int i=0; i < n+1; i++) {objLine_d[i]= s_d[0][i] ;}
 
         cuda_ret = cudaMemcpy(objLine_h, objLine_d, sizeof(double)*n, cudaMemcpyDeviceToHost);
     	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
@@ -110,16 +111,18 @@ int main(int argc, char**argv) {
         // Find index of entering variable k
         double minValue = 1.0;
         int minIndex = 0;
-        for (unsigned int i=0; i < m; i++) {
+        for (unsigned int i=1; i < n+1; i++) {
             if (objLine_h[i] < minValue) {
-                minValue = objLine_h;
+                minValue = objLine_h[i];
                 minIndex = i;
             }
         }
         if (minValue>=0) {
+            printf("Optimal Value")
+            continueVar = False;
             break;
         } else {
-            k_h = minIndex + 1;
+            k_h = minIndex;
         }
 
         // Copy index k to device
@@ -141,8 +144,24 @@ int main(int argc, char**argv) {
     	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
         
         // Find the index of the leaving variable r
-
+        minValue = 10000.0;
+        minIndex = 0;
+        for (unsigned int i=1; i < m+1; i++) {
+            if (theta_h[i] < minValue && theta_h[i] > 0) {
+                minValue = theta_h[i];
+                minIndex = i;
+            }
+        }
+        if (minValue==10000.0) {
+            printf("unbounded");
+            continueVar = False;
+            break;
+        } else {
+            r_h = minIndex;
+        }
         // Copy index r to device
+        cuda_ret = cudaMemcpy(r_d, r_h, sizeof(int), cudaMemcpyHostToDevice);
+	    if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 
         // Kernel 2 to update the line r of the Simplex tableau
         const unsigned int numBlocks2 = n/THREADS_PER_BLOCK + 1;
@@ -165,7 +184,9 @@ int main(int argc, char**argv) {
         kernel4<<<gridDim, blockDim>>>(tab_d, columnk_d, k_d, r_d);
 
         cudaDeviceSynchronize();
-
+    }
     // Calculate optimal value and return it
+    cuda_ret = cudaMemcpy(objLine_h, objLine_d, sizeof(double)*n, cudaMemcpyDeviceToHost);
+    if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
 
 }
