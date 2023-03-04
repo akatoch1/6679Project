@@ -1,4 +1,4 @@
-__global__ void vecAddKernel(double **tab, double *theta, double *colk, int k) 
+__global__ void kernel1(double **tab, double *theta, double *colk, int k) 
 {
 int i = blockDim.x * blockIdx.x + threadIdx.x;
 double w = tab[i][k];

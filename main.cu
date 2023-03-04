@@ -1,9 +1,17 @@
 #include <stdio.h>
+#include "kernel1.cu"
+#include "kernel2.cu"
+#include "kernel3.cu"
+#include "kernel4.cu"
 
 int main(int argc, char**argv) {
-    // m = number of constraints
-    // n = number of variables (no slack vars)
-    // b = highest value of constraint value 
+    unsigned int m; // number of constraints
+    unsigned int n; // number of variables (no slack vars)
+    unsigned int b; // b = highest value of constraint value 
+   
+    m = atoi(argv[0]);
+    n = atoi(argv[1]);
+    b = atoi(argv[2]);
     
     // Initialize host variables
     double* xB_h = (double*) malloc( sizeof(double)*m );
@@ -39,7 +47,7 @@ int main(int argc, char**argv) {
         }
     }
 
-    double* s_h = (double*) malloc( sizeof(double)*(m+1)*(n+1));
+    double* tab_h = (double*) malloc( sizeof(double)*(m+1)*(n+1));
     // Assign vals for 0,0
     // Assign vals for m,0
     // Assign vals for 0,n
@@ -51,11 +59,11 @@ int main(int argc, char**argv) {
     
     int* r_h = malloc(sizeof(int));
 
-    double* columnk_h = (double*) malloc( sizeof(double)*(m+1));
+    double* theta_h = (double*) malloc( sizeof(double)*(m+1));
 
     // Allocate device variables
-    double* s_d;
-    cuda_ret = cudaMalloc((void**) &s_d, sizeof(double)*(m+1)*(n+1));
+    double* tab_d;
+    cuda_ret = cudaMalloc((void**) &tab_d, sizeof(double)*(m+1)*(n+1));
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
     
     double* xB_d;
@@ -75,6 +83,10 @@ int main(int argc, char**argv) {
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
 
     double* columnk_d;
+    cuda_ret = cudaMalloc((void**) &columnk_d, sizeof(double)*(m+1));
+	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
+
+    double* theta_d;
     cuda_ret = cudaMalloc((void**) &columnk_d, sizeof(double)*(m+1));
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
 
@@ -117,9 +129,15 @@ int main(int argc, char**argv) {
         cudaDeviceSynchronize();
 
         // Kernel 1 to process ratio column
+        const unsigned int THREADS_PER_BLOCK = 512;
+        const unsigned int numBlocks1 = m/THREADS_PER_BLOCK + 1;
+        dim3 gridDim(numBlocks1, 1, 1), blockDim(THREADS_PER_BLOCK, 1, 1);
+        kernel1<<<gridDim, blockDim>>>(tab_d, theta_d, columnk_d, k_d);
+
+        cudaDeviceSynchronize();
 
         // Copy ratio column to host
-        cuda_ret = cudaMemcpy(columnk_h, columnk_d, sizeof(double)*(m+1), cudaMemcpyDeviceToHost);
+        cuda_ret = cudaMemcpy(theta_h, theta_d, sizeof(double)*(m+1), cudaMemcpyDeviceToHost);
     	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
         
         // Find the index of the leaving variable r
@@ -127,12 +145,26 @@ int main(int argc, char**argv) {
         // Copy index r to device
 
         // Kernel 2 to update the line r of the Simplex tableau
+        const unsigned int numBlocks2 = n/THREADS_PER_BLOCK + 1;
+        dim3 gridDim(numBlocks2, 1, 1), blockDim(THREADS_PER_BLOCK, 1, 1);
+        kernel2<<<gridDim, blockDim>>>(tab_d, columnk_d, k_d, r_d);
+
+        cudaDeviceSynchronize();
 
         // Kernel 3 to update Simplex tableau
+        const unsigned int numBlocksX3 = m/THREADS_PER_BLOCK + 1;
+        const unsigned int numBlocksY3 = n/THREADS_PER_BLOCK + 1;
+        dim3 gridDim(numBlocksX3, numBlocksY3, 1), blockDim(THREADS_PER_BLOCK, THREADS_PER_BLOCK, 1);
+        kernel3<<<gridDim, blockDim>>>(tab_d, columnk_d, k_d, r_d);
+
+        cudaDeviceSynchronize();
 
         // Kernel 4 to Update column k of the Simplex Tableau
+        const unsigned int numBlocks4 = n/THREADS_PER_BLOCK + 1;
+        dim3 gridDim(numBlocks4, 1, 1), blockDim(THREADS_PER_BLOCK, 1, 1);
+        kernel4<<<gridDim, blockDim>>>(tab_d, columnk_d, k_d, r_d);
 
-        // Check if should stop
+        cudaDeviceSynchronize();
 
     // Calculate optimal value and return it
 
