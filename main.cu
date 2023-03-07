@@ -176,7 +176,7 @@ int main(int argc, char**argv) {
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
 
     double* theta_d;
-    cuda_ret = cudaMalloc((void**) &columnk_d, sizeof(double)*(m+1));
+    cuda_ret = cudaMalloc((void**) &theta_d, sizeof(double)*(m+1));
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
 
     
