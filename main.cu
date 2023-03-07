@@ -5,10 +5,13 @@
 #include "kernel4.cu"
 #include "support.h"
 int main(int argc, char**argv) {
+
+
     unsigned int m; // number of constraints
     unsigned int n; // number of variables (no slack vars)
     unsigned int b; // b = highest value of constraint value 
-   
+
+
     m = atoi(argv[1]);
     n = atoi(argv[2]);
     b = atoi(argv[3]);
@@ -19,7 +22,7 @@ int main(int argc, char**argv) {
     
     double* xN_h = (double*) malloc( sizeof(double)*n ); // index's of the variables not in the Basis.
     for (unsigned int i=0; i < n; i++) { xB_h[i] = i; }
-
+    
     double* cB_h = (double*) malloc( sizeof(double)*m ); // C values for the basic variables
     for (unsigned int i=0; i < m; i++) { cB_h[i] = 0; }
 
@@ -29,10 +32,10 @@ int main(int argc, char**argv) {
     double* b_h = (double*) malloc( sizeof(double)*m ); // Right hand side values 
     for (unsigned int i=0; i < m; i++) { b_h[i] = rand()%b; }
     
-    double* svec = (double*) malloc( sizeof(double)*(m+1)));
+    double* svec = (double*) malloc( sizeof(double)*(m+1));
     
-   
-        
+
+
 
     //double* B_h = (double*) malloc( sizeof(double)*m*m ); // Constraint coefficents of basic variables
     double* B_h[m];
@@ -48,15 +51,17 @@ int main(int argc, char**argv) {
             }
         }
     }
+
+
     double* cBB	= (double*) malloc( sizeof(double)*m);
     for	(int i = 0; i < m; i++) {
     	double z = 0;
     	for (int j = 0; j < m; j++) {
-            z += cB_h[j] * B_h[j][i]
+            z += cB_h[j] * B_h[j][i];
      	}
 	cBB[i] = z;
     }
-    double z = 0
+    double z = 0;
     for (int i = 0; i < m; i++) {
     	z += cBB[i] * b_h[i];
     }
@@ -64,22 +69,26 @@ int main(int argc, char**argv) {
     for (int i = 1; i < m+1; i++) {
     	double sum = 0;
 	for (int j = 0; j < m; j++) {
-	    sum += B_h[i-1][j] * b[j];
+	    sum += B_h[i-1][j] * b_h[j];
 	}
 	svec[i] = sum;
     }   
-   
+
+
        
     //double* N_h = (double*) malloc( sizeof(double)*m*n ); // Constraint coefficents of non-basic variables
     double* N_h[m];
     for (int i = 0; i < m; i++) {
-        B_h[i] = (double*)malloc(n * sizeof(double));
+        N_h[i] = (double*)malloc(n * sizeof(double));
     }
+    printf("hi");
+    fflush(stdout);
     for (unsigned int i=0; i < m; i++) { 
         for (unsigned int j=0; j < n; j++) { 
             N_h[i][j] = (rand()%10-5);
         }
     }
+
 
     //double* tab_h = (double*) malloc( sizeof(double)*(m+1)*(n+1)); // Simplex tableau
     double* tab_h[m+1];
@@ -87,8 +96,10 @@ int main(int argc, char**argv) {
     	tab_h[i] = (double*) malloc((n+1) * sizeof(double));
     }
     for (int i = 0; i < (m+1); i++) {
-    	tab_h[i][0] = xB_h[i]
+    	tab_h[i][0] = xB_h[i];
     }
+ 
+ 
     // Assign vals for 0,0
     // Assign vals for m,0
     // Assign vals for 0,n
@@ -138,10 +149,10 @@ int main(int argc, char**argv) {
     double* theta_h = (double*) malloc( sizeof(double)*(m+1)); // Ratio of right-hand side to k row
 
     // Allocate device variables
-    double** tab_d;
+    double* tab_d;
     cuda_ret = cudaMalloc((void**) &tab_d, sizeof(double)*(m+1)*(n+1));
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
-       
+    
 
  
     double* xB_d;
@@ -151,7 +162,7 @@ int main(int argc, char**argv) {
     //double* objLine_d;
     //cuda_ret = cudaMalloc((void**) &objLine_d, sizeof(double)*n);
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
-
+	
     int k_d;
     //cuda_ret = cudaMalloc((void**) &k_d, sizeof(int));
 //	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
