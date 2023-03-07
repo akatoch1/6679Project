@@ -21,7 +21,7 @@ int main(int argc, char**argv) {
     for (unsigned int i=0; i < m; i++) { xB_h[i] = n+i; }
     
     double* xN_h = (double*) malloc( sizeof(double)*n ); // index's of the variables not in the Basis.
-    for (unsigned int i=0; i < n; i++) { xB_h[i] = i; }
+    for (unsigned int i=0; i < n; i++) { xN_h[i] = i; }
     
     double* cB_h = (double*) malloc( sizeof(double)*m ); // C values for the basic variables
     for (unsigned int i=0; i < m; i++) { cB_h[i] = 0; }
