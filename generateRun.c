@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         for (int j=0;j<m;j++) {
             bArray[i] = bArray[i] +  aMatrix[i][j]*vArray[j];
         }
-        bArray[i] = bArray[i] + round(((((float)rand())/RAND_MAX)-0.5) * 3);
+        bArray[i] = bArray[i] + round(((((float)rand())/RAND_MAX)) * 3);
     }
 
     float cArray[m];
