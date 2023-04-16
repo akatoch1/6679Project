@@ -14,24 +14,19 @@ int main(int argc, char**argv) {
     int b[2] = {12,16}; //
 
     double xB_h[m];
-    for (unsigned int i=0; i < m; i++) { xB_h[i] = n+i; printf("%.0f ", xB_h[i]); }
-    printf("\n\n");
-
+    for (unsigned int i=0; i < m; i++) { xB_h[i] = n+i;}
+    
     double xN_h[n];
-    for (unsigned int i=0; i < n; i++) { xN_h[i] = i; printf("%.0f ", xN_h[i]); }
-    printf("\n\n");
-
+    for (unsigned int i=0; i < n; i++) { xN_h[i] = i;}
+  
     double cB_h[m];
-    for (unsigned int i=0; i < m; i++) { cB_h[i] = 0; printf("%.0f ", cB_h[i]); }
-    printf("\n\n");
-
+    for (unsigned int i=0; i < m; i++) { cB_h[i] = 0;}
+   
     double cN_h[n];
-    for (unsigned int i=0; i < n; i++) { cN_h[i] = c[i]; printf("%.0f ", cN_h[i]);}
-    printf("\n\n");
-
+    for (unsigned int i=0; i < n; i++) { cN_h[i] = c[i];}
+ 
     double b_h[m];
-    for (unsigned int i=0; i < m; i++) { b_h[i] = b[i]; printf("%.0f ", b_h[i]);}
-    printf("\n\n");
+    for (unsigned int i=0; i < m; i++) { b_h[i] = b[i];}
 
     double B_h[m][m];
     for (unsigned int i=0; i < m; i++) { 
@@ -41,22 +36,15 @@ int main(int argc, char**argv) {
             } else {
                 B_h[i][j] = 0;
             }
-            printf("%.0f ", B_h[i][j]);
         }
-        printf("\n");
     }
-    printf("\n");
 
     double N_h[m][n];
     for (unsigned int i=0; i < m; i++) { 
         for (unsigned int j=0; j < m; j++) { 
             N_h[i][j] = A[i][j];
-            printf("%.0f ", N_h[i][j]);
         }
-        printf("\n");
     }
-    printf("\n");
-
 
     double svec[m+1];
     double cBB[m];
@@ -117,17 +105,15 @@ int main(int argc, char**argv) {
 	}   
     }	
 
-    for (int i = 0; i < m+1; i++)
-    {
-        for (int j = 0; j < n+1; j++)
-        {
-            printf("%.0f ", tab[i][j]);
-        }
-        printf("\n");        
-    }
-    printf("\n");
-
-
+// //////////////////////////////////////////////////        
+//     for (int i = 0; i < m+1; i++) {
+//         for (int j = 0; j < n+1; j++) {
+//             printf("%.1f ", tab[i][j]);
+//         }
+//         printf("\n");        
+//     }
+//     printf("\n");
+// //////////////////////////////////////////////////
     int kIndex;
     bool continueVar = true;
     while (continueVar == true) {
@@ -141,7 +127,7 @@ int main(int argc, char**argv) {
             }
         }
         if (minValue>=0) {
-            printf("Optimal Value");
+            printf("Optimal Value\n");
             continueVar = false;
             break;
         } else {
@@ -152,7 +138,7 @@ int main(int argc, char**argv) {
         double colK[m];
         double test[m];
         for (unsigned int i=0; i < m+1; i++) {
-            colK[i] = (char)tab[i][kIndex];
+            colK[i] = tab[i][kIndex];
         }
 
 
@@ -173,7 +159,7 @@ int main(int argc, char**argv) {
             }
         }
         if (minValue==10000.0) {
-            printf("unbounded");
+            printf("unbounded\n");
             continueVar = false;
             break;
         } else {
@@ -185,15 +171,7 @@ int main(int argc, char**argv) {
         for (unsigned int i=0; i < n+1; i++) {
             tab[rIndex][i] = tab[rIndex][i] / divider;
         }
-//////////////////////////////
-        for (int i = 0; i < m+1; i++) {
-            for (int j = 0; j < n+1; j++) {
-                printf("%.1f ", tab[i][j]);
-            }
-            printf("\n");        
-        }
-        printf("\n");  
-//////////////////////////////
+        
         // Calculate new values rest of tableau
         double holderTab[m+1][n+1];
         for (unsigned int i=0; i < m+1; i++) {
@@ -211,16 +189,8 @@ int main(int argc, char**argv) {
                 tab[i][j] = holderTab[i][j];
             }
         }
-//////////////////////////////////////////////////        
-        for (int i = 0; i < m+1; i++) {
-            for (int j = 0; j < n+1; j++) {
-                printf("%.1f ", tab[i][j]);
-            }
-            printf("\n");        
-        }
-        printf("\n");
-//////////////////////////////////////////////////
-        double w = tab[rIndex][kIndex];
+
+        double w = colK[rIndex];
         for (unsigned int i=0; i < n+1; i++) {
             if (i!=rIndex) {
                 tab[i][kIndex] = -1 * colK[i]/w;
@@ -229,14 +199,23 @@ int main(int argc, char**argv) {
                 tab[i][kIndex] = 1/w;
             }
         }
-//////////////////////////////////////////////////        
-        for (int i = 0; i < m+1; i++) {
-            for (int j = 0; j < n+1; j++) {
-                printf("%.1f ", tab[i][j]);
-            }
-            printf("\n");        
-        }
-        printf("\n");
-//////////////////////////////////////////////////
+// ////////////////////////////////////////////////        
+//       for (int i = 0; i < m+1; i++) {
+//            for (int j = 0; j < n+1; j++) {
+//                printf("%.1f ", tab[i][j]);
+//            }
+//            printf("\n");        
+//        }
+//        printf("\n");
+//        printf("iteration end\n\n");
+// ////////////////////////////////////////////////
     }
+    ////////////////////////////////////////////////        
+      for (int i = 0; i < m+1; i++) {
+           for (int j = 0; j < n+1; j++) {
+               printf("%.1f ", tab[i][j]);
+           }
+           printf("\n");        
+       }
+////////////////////////////////////////////////
 }
