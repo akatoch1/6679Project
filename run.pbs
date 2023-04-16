@@ -18,7 +18,10 @@ cd $PBS_O_WORKDIR
 
 # Load the cuda module so we can find the run-time libraries
 module load cuda
+cd /storage/home/hpaceice1/akatoch3/6679Project
 
+#make
+make
 # Run the code
 ./simplex > myoutput.log
 

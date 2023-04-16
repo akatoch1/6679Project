@@ -4,16 +4,27 @@
 #include "kernel3.cu"
 #include "kernel4.cu"
 #include "support.h"
-void printMatrix(float **m, int r, int c) {
+void printMatrix(double *m, int r, int c) {
+  for (int i = 0; i < r; i++)
+    {
+      for (int j = 0; j < c; j++)
+      {
+        printf("%f ", m[i*c + j]);
+	}	    
+      printf("\n");
+    }
+}
+void printMatrix2(double **m, int r, int c) {
   for (int i = 0; i < r; i++)
     {
       for (int j = 0; j < c; j++)
       {
         printf("%f ", m[i][j]);
-	}	    
+        }
       printf("\n");
     }
 }
+
 int main(int argc, char**argv) {
 
 
@@ -39,7 +50,8 @@ int main(int argc, char**argv) {
     
     double* cB_h = (double*) malloc( sizeof(double)*m ); // C values for the basic variables
     for (unsigned int i=0; i < m; i++) { cB_h[i] = 0; }
-
+    
+    
     double* cN_h = (double*) malloc( sizeof(double)*n ); // C values for the non-basic variables
     for (unsigned int i=0; i < n; i++) { cN_h[i] = (rand()%10-5); }
     cN_h[0] = 40;
@@ -109,15 +121,9 @@ int main(int argc, char**argv) {
     N_h[1][0] = 2;
     N_h[1][1] = 1;
     
-    //double* tab_h = (double*) malloc( sizeof(double)*(m+1)*(n+1)); // Simplex tableau
-    double* tab_h = (double *) malloc(((n+1) * (m+1)) * sizeof(double));
-   // for (int i = 0; i < (m+1); i++) {
-    //	tab_h[i] = (double*) malloc((n+1) * sizeof(double));
-    //}
     
-    //for (int i = 0; i < (m+1); i++) {
-//	tab_h[i*(m+1)] = xB_h[i];
-  //  }
+    double* tab_h = (double *) malloc(((n+1) * (m+1)) * sizeof(double));
+    double* columnk_h = (double *) malloc((m+1) * sizeof(double));
  
  
     // Assign vals for 0,0
@@ -151,20 +157,23 @@ int main(int argc, char**argv) {
     }
 
     //update tab
+  //  for (int i = 0; i < m+1; i++) {
+   // 	tab_h[i * (n+1)] = svec[i];
+  //  }    
+    //printMatrix2(smat, m+1, n);
     for (int i = 0; i < m+1; i++) {
-    	tab_h[i * (n+1)] = svec[i];
-    }    
-        
-    for (int i = 0; i < m+1; i++) {
-    	for (int j = 1; j < n+1; j++) {
-	    tab_h[i * (n+1) + j] = smat[i][j];
+    	for (int j = 0; j < n+1; j++) {
+	    tab_h[i * (n+1) + (j+1)] = smat[i][j];
 	}   
     }	
+    for (int i = 0; i < m+1; i++) {
+        tab_h[i * (n+1)] = svec[i];
+    }
     double* objLine_h = (double*) malloc( sizeof(double)*(n+1)); // Objective line used to determine k
     
     int k_h;
     
-    int r_h;
+
 
     double* theta_h = (double*) malloc( sizeof(double)*(m+1)); // Ratio of right-hand side to k row
 
@@ -179,9 +188,7 @@ int main(int argc, char**argv) {
     cuda_ret = cudaMalloc((void**) &xB_d, sizeof(double)*m);
 	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
     
-    //double* objLine_d;
-    //cuda_ret = cudaMalloc((void**) &objLine_d, sizeof(double)*n);
-	if(cuda_ret != cudaSuccess) FATAL("Unable to allocate device memory");
+
 	
     int k_d;
     //cuda_ret = cudaMalloc((void**) &k_d, sizeof(int));
@@ -209,17 +216,18 @@ int main(int argc, char**argv) {
 	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 
     cuda_ret = cudaMemcpy(xB_d, xB_h, sizeof(double)*m, cudaMemcpyHostToDevice);
+
 	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
-	
-    printMatrix(tab_h, m+1, n+1);	
+   
+    //printMatrix(tab_h, m+1, n+1);	
     // Iterate until optimal or infeasible/unbounded is found
     bool continueVar = true;
+    
     while (continueVar == true) {
         // Copy first line of the Simplex tableau to host
         for (unsigned int i=0; i < n+1; i++) {objLine_h[i]= tab_h[i];}
 
-        //cuda_ret = cudaMemcpy(objLine_h, objLine_d, sizeof(double)*n, cudaMemcpyDeviceToHost);
-    	//if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
+
         
         cudaDeviceSynchronize();
 
@@ -240,27 +248,33 @@ int main(int argc, char**argv) {
             k_h = minIndex;
         }
 
-        // Copy index k to device
-     //   cuda_ret = cudaMemcpy(k_d, k_h, sizeof(int), cudaMemcpyHostToDevice);
-//	        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
+
+
+
 
         cudaDeviceSynchronize();
-
+	printMatrix(tab_h, m+1, n+1);
         // Kernel 1 to process ratio column
         const unsigned int THREADS_PER_BLOCK = 512;
         const unsigned int numBlocks1 = m/THREADS_PER_BLOCK + 1;
         dim3 gridDim(numBlocks1, 1, 1), blockDim(THREADS_PER_BLOCK, 1, 1);
-        kernel1<<<gridDim, blockDim>>>(tab_d, theta_d, columnk_d, k_d, n);
+        kernel1<<<gridDim, blockDim>>>(tab_d, theta_d, columnk_d, k_h, n);
 
         cudaDeviceSynchronize();
 	
         // Copy ratio column to host
         cuda_ret = cudaMemcpy(theta_h, theta_d, sizeof(double)*(m+1), cudaMemcpyDeviceToHost);
     	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
-        
-        // Find the index of the leaving variable r
+
+	cuda_ret = cudaMemcpy(columnk_h, columnk_d, sizeof(double)*(m+1), cudaMemcpyDeviceToHost);
+        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");        
+
+	cuda_ret = cudaMemcpy(columnk_d, columnk_h, sizeof(double)*(m+1), cudaMemcpyHostToDevice);
+        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
+	// Find the index of the leaving variable r
         minValue = 10000.0;
         minIndex = 0;
+	int r_h;
         for (unsigned int i=1; i < m+1; i++) {
             if (theta_h[i] < minValue && theta_h[i] > 0) {
                 minValue = theta_h[i];
@@ -275,9 +289,8 @@ int main(int argc, char**argv) {
             r_h = minIndex;
         }
         // Copy index r to device
-       // cuda_ret = cudaMemcpy(r_d, r_h, sizeof(int), cudaMemcpyHostToDevice);
-//	    if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 
+	//printf("%d\n", r_h);
         // Kernel 2 to update the line r of the Simplex tableau
         const unsigned int numBlocks2 = n/THREADS_PER_BLOCK + 1;
         dim3 gridDim2(numBlocks2, 1, 1);
@@ -285,31 +298,44 @@ int main(int argc, char**argv) {
         kernel2<<<gridDim2, blockDim2>>>(tab_d, columnk_d, k_h, r_h, n);
 	
         cudaDeviceSynchronize();
-	//copy obj
-	//cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
-        //if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
-	//for (unsigned int i=0; i < n+1; i++) {objLine_h[i]= tab_h[i];}
-
 	
+	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
+        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
+	
+	printMatrix(tab_h, m+1,	 n+1);
+	
+	cuda_ret = cudaMemcpy(tab_d, tab_h, sizeof(double)*(m+1)*(n+1), cudaMemcpyHostToDevice);
+        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
+	
+	cuda_ret = cudaMemcpy(columnk_h, columnk_d, sizeof(double)*(m+1), cudaMemcpyDeviceToHost);
+	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");	
+	
+	cuda_ret = cudaMemcpy(columnk_d, columnk_h, sizeof(double)*(m+1), cudaMemcpyHostToDevice);
+	if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");	
 	
         // Kernel 3 to update Simplex tableau
         const unsigned int numBlocksX3 = m/THREADS_PER_BLOCK + 1;
         const unsigned int numBlocksY3 = n/THREADS_PER_BLOCK + 1;
         dim3 gridDim3(numBlocksX3, numBlocksY3, 1), blockDim3(THREADS_PER_BLOCK, THREADS_PER_BLOCK, 1);
         kernel3<<<gridDim3, blockDim3>>>(tab_d, columnk_d, k_h, r_h, n);
-
+		
         cudaDeviceSynchronize();
 	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
-        for (unsigned int i=0; i < n+1; i++) {objLine_h[i]= tab_h[i];}
-
+        //for (unsigned int i=0; i < n+1; i++) {objLine_h[i]= tab_h[i];}
+	//cuda_ret = cudaMemcpy(tab_d, tab_h, sizeof(double)*(m+1)*(n+1), cudaMemcpyHostToDevice);
+        //if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
+	printMatrix(tab_h, m+1,n+1);
 
         // Kernel 4 to Update column k of the Simplex Tableau
         const unsigned int numBlocks4 = n/THREADS_PER_BLOCK + 1;
         dim3 gridDim4(numBlocks4, 1, 1), blockDim4(THREADS_PER_BLOCK, 1, 1);
         kernel4<<<gridDim4, blockDim4>>>(tab_d, columnk_d, k_h, r_h, n);
-
+	
         cudaDeviceSynchronize();
+    	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
+        if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
+       	printMatrix(tab_h, m+1, n+1);
     }
     // Calculate optimal value and return it
     //cuda_ret = cudaMemcpy(objLine_h, objLine_d, sizeof(double)*n, cudaMemcpyDeviceToHost);
