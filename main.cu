@@ -26,19 +26,55 @@ void printMatrix2(double **m, int r, int c) {
 }
 
 int main(int argc, char**argv) {
+    if (argc != 4) {
+        return 0;
+    }
+    int n = atoi(argv[1]);
+    int m = atoi(argv[2]);
+    int bVal=15; 
+    int cVal=5;
+    int seedVal = atoi(argv[3]);
+
+    float vArray[m];
+    srand(seedVal);
+    int throwAway = round((((float)rand())/RAND_MAX) * bVal);
+    for (int i=0;i<m;i++) {
+        vArray[i] = round((((float)rand())/RAND_MAX) * bVal);
+    }
+
+    float A[n][m];
+    for (int i=0;i<n;i++) {
+        for (int j=0;j<m;j++) {
+            A[i][j] = round(((((float)rand())/RAND_MAX)-0.5) * bVal);
+        }
+    }
+
+    float b[n];
+    for (int i=0;i<n;i++) {
+        b[i] = 0;
+        for (int j=0;j<m;j++) {
+            b[i] = b[i] +  A[i][j]*vArray[j];
+        }
+        b[i] = b[i] + round(((((float)rand())/RAND_MAX)) * 3);
+    }
+    
+    float c[m];
+    for (int i=0;i<m;i++) {
+        c[i] = round(((((float)rand())/RAND_MAX)-0.5) * cVal);
+        
+    }
 
 
-    unsigned int m; // number of constraints
-    unsigned int n; // number of variables (no slack vars)
+    
+    
      // b = highest value of constraint value 
-    unsigned int b;
+    
     //unsigned int hb;
 
     //m = atoi(argv[1]);
     //n = atoi(argv[2]);
     //b = atoi(argv[3]);
-    m = 2;
-    n = 2;
+   
     
     cudaError_t cuda_ret;
     // Initialize host variables
@@ -53,13 +89,13 @@ int main(int argc, char**argv) {
     
     
     double* cN_h = (double*) malloc( sizeof(double)*n ); // C values for the non-basic variables
-    for (unsigned int i=0; i < n; i++) { cN_h[i] = (rand()%10-5); }
-    cN_h[0] = 40;
-    cN_h[1] = 30;
+    for (unsigned int i=0; i < n; i++) { cN_h[i] = c[i]; }
+   
+   
     double* b_h = (double*) malloc( sizeof(double)*m ); // Right hand side values 
-    for (unsigned int i=0; i < m; i++) { b_h[i] = rand()%b; }
-    b_h[0] = 12;
-    b_h[1] = 16;
+    for (unsigned int i=0; i < m; i++) { b_h[i] = b[i]; }
+   
+   
     double* svec = (double*) malloc( sizeof(double)*(m+1));
     
 
@@ -113,14 +149,10 @@ int main(int argc, char**argv) {
     fflush(stdout);
     for (unsigned int i=0; i < m; i++) { 
         for (unsigned int j=0; j < n; j++) { 
-            N_h[i][j] = (rand()%10-5);
+            N_h[i][j] = A[i][j];
         }
     }
-    N_h[0][0] = 1;
-    N_h[0][1] = 1;
-    N_h[1][0] = 2;
-    N_h[1][1] = 1;
-    
+       
     
     double* tab_h = (double *) malloc(((n+1) * (m+1)) * sizeof(double));
     double* columnk_h = (double *) malloc((m+1) * sizeof(double));
