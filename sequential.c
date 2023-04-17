@@ -1,18 +1,48 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
 
 int main(int argc, char**argv) {
-    int m = 2;
-    int n = 2;
-    int c[2] = {40,30}; //
-    int A[2][2]; //
-    A[0][0] = 1; //
-    A[0][1] = 1; //
-    A[1][0] = 2; //
-    A[1][1] = 1; //
-    int b[2] = {12,16}; //
+    if (argc != 4) {
+        return 0;
+    }
+    int n = atoi(argv[1]);
+    int m = atoi(argv[2]);
+    int bVal=15; 
+    int cVal=5;
+    int seedVal = atoi(argv[3]);
 
+    float vArray[m];
+    srand(seedVal);
+    int throwAway = round((((float)rand())/RAND_MAX) * bVal);
+    for (int i=0;i<m;i++) {
+        vArray[i] = round((((float)rand())/RAND_MAX) * bVal);
+    }
+
+    float A[n][m];
+    for (int i=0;i<n;i++) {
+        for (int j=0;j<m;j++) {
+            A[i][j] = round(((((float)rand())/RAND_MAX)-0.5) * bVal);
+        }
+    }
+
+    float b[n];
+    for (int i=0;i<n;i++) {
+        b[i] = 0;
+        for (int j=0;j<m;j++) {
+            b[i] = b[i] +  A[i][j]*vArray[j];
+        }
+        b[i] = b[i] + round(((((float)rand())/RAND_MAX)) * 3);
+    }
+    
+    float c[m];
+    for (int i=0;i<m;i++) {
+        c[i] = round(((((float)rand())/RAND_MAX)-0.5) * cVal);
+        
+    }
     double xB_h[m];
     for (unsigned int i=0; i < m; i++) { xB_h[i] = n+i;}
     
@@ -105,15 +135,6 @@ int main(int argc, char**argv) {
 	}   
     }	
 
-//////////////////////////////////////////////////        
-    for (int i = 0; i < m+1; i++) {
-        for (int j = 0; j < n+1; j++) {
-            printf("%.1f ", tab[i][j]);
-        }
-        printf("\n");        
-    }
-    printf("\n");
-//////////////////////////////////////////////////
     int kIndex;
     bool continueVar = true;
     while (continueVar == true) {
@@ -172,16 +193,6 @@ int main(int argc, char**argv) {
             tab[rIndex][i] = tab[rIndex][i] / divider;
         }
         
-        //////////////////////////////////////////////////        
-        for (int i = 0; i < m+1; i++) {
-            for (int j = 0; j < n+1; j++) {
-                printf("%.1f ", tab[i][j]);
-            }
-            printf("\n");        
-        }
-        printf("\n");
-        //////////////////////////////////////////////////
-
         // Calculate new values rest of tableau
         double holderTab[m+1][n+1];
         for (unsigned int i=0; i < m+1; i++) {
@@ -199,15 +210,7 @@ int main(int argc, char**argv) {
                 tab[i][j] = holderTab[i][j];
             }
         }
-        //////////////////////////////////////////////////        
-        for (int i = 0; i < m+1; i++) {
-            for (int j = 0; j < n+1; j++) {
-                printf("%.1f ", tab[i][j]);
-            }
-            printf("\n");        
-        }
-        printf("\n");
-        //////////////////////////////////////////////////
+        
         double w = colK[rIndex];
         for (unsigned int i=0; i < n+1; i++) {
             if (i!=rIndex) {
@@ -217,23 +220,7 @@ int main(int argc, char**argv) {
                 tab[i][kIndex] = 1/w;
             }
         }
-////////////////////////////////////////////////        
-      for (int i = 0; i < m+1; i++) {
-           for (int j = 0; j < n+1; j++) {
-               printf("%.1f ", tab[i][j]);
-           }
-           printf("\n");        
-       }
-       printf("\n");
-       printf("iteration end\n\n");
-////////////////////////////////////////////////
+
     }
-    ////////////////////////////////////////////////        
-      for (int i = 0; i < m+1; i++) {
-           for (int j = 0; j < n+1; j++) {
-               printf("%.1f ", tab[i][j]);
-           }
-           printf("\n");        
-       }
-////////////////////////////////////////////////
+    printf("%.1f ", tab[0][0]);
 }
