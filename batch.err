@@ -2343,3 +2343,317 @@ ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsysca
 7ffffffd4000-7ffffffff000 rw-p 00000000 00:00 0                          [stack]
 ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
 /var/spool/torque/mom_priv/jobs/11078.sched-pace-ice.pace.gatech.edu.SC: line 26: 151928 Aborted                 (core dumped) ./simplex > myoutput.log
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+*** Error in `./simplex': corrupted size vs. prev_size: 0x00000000006ba7b0 ***
+======= Backtrace: =========
+/lib64/libc.so.6(+0x80c37)[0x2aaab0d63c37]
+/lib64/libc.so.6(+0x82135)[0x2aaab0d65135]
+/lib64/libc.so.6(__libc_calloc+0xb4)[0x2aaab0d69214]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x5ae865)[0x2aaaab711865]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x5aea00)[0x2aaaab711a00]
+/lib64/libc.so.6(__cxa_finalize+0x9a)[0x2aaab0d1d05a]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x28056)[0x2aaaab18b056]
+======= Memory map: ========
+00400000-00419000 r-xp 00000000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+00618000-00619000 r--p 00018000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+00619000-0061a000 rw-p 00019000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+0061a000-00e06000 rw-p 00000000 00:00 0                                  [heap]
+200000000-200200000 ---p 00000000 00:00 0 
+200200000-200400000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+200400000-200600000 rw-s 00000000 00:05 13724                            /dev/nvidia2
+200600000-203e00000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+203e00000-204c00000 ---p 00000000 00:00 0 
+204c00000-204e00000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+204e00000-205000000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205000000-205200000 rw-s 205000000 00:05 1386                            /dev/nvidia-uvm
+205200000-205400000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205400000-205600000 ---p 00000000 00:00 0 
+205600000-205800000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205800000-205a00000 rw-s 00000000 00:04 115660449                        /dev/zero (deleted)
+205a00000-300200000 ---p 00000000 00:00 0 
+10000000000-10004000000 ---p 00000000 00:00 0 
+2aaaaaaab000-2aaaaaacd000 r-xp 00000000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaaacd000-2aaaaaacf000 r-xp 00000000 00:00 0                          [vdso]
+2aaaaaacf000-2aaaaaad3000 rw-p 00000000 00:00 0 
+2aaaaaad3000-2aaaaaae3000 -w-s 00000000 00:05 13724                      /dev/nvidia2
+2aaaaaae3000-2aaaaaae4000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae4000-2aaaaaae5000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae5000-2aaaaaae6000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae6000-2aaaaaae7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae7000-2aaaaaae8000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae8000-2aaaaaae9000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae9000-2aaaaaaea000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaea000-2aaaaaaeb000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaeb000-2aaaaaaec000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaec000-2aaaaaaed000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaed000-2aaaaaaee000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaee000-2aaaaaaef000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaef000-2aaaaaaf0000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf0000-2aaaaaaf1000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf1000-2aaaaaaf2000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf2000-2aaaaaaf3000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf3000-2aaaaaaf4000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf4000-2aaaaaaf5000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf5000-2aaaaaaf6000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf6000-2aaaaaaf7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf7000-2aaaaac8f000 rw-p 00000000 00:00 0 
+2aaaaaccc000-2aaaaaccd000 r--p 00021000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaaccd000-2aaaaacce000 rw-p 00022000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaacce000-2aaaaaccf000 rw-p 00000000 00:00 0 
+2aaaaaccf000-2aaaaace4000 r-xp 00000000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaace4000-2aaaaaee4000 ---p 00015000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee4000-2aaaaaee5000 r--p 00015000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee5000-2aaaaaee6000 rw-p 00016000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee6000-2aaaaaee7000 rw-p 00000000 00:00 0 
+2aaaaaee7000-2aaaaaf5e000 r-xp 00000000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaaaf5e000-2aaaab15e000 ---p 00077000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaab15e000-2aaaab162000 rw-p 00077000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaab162000-2aaaab163000 rw-p 00000000 00:00 0 
+2aaaab163000-2aaaafc06000 r-xp 00000000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafc06000-2aaaafe05000 ---p 04aa3000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafe05000-2aaaafe13000 rw-p 04aa2000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafe13000-2aaaafe1d000 rw-p 00000000 00:00 0 
+2aaaafe1d000-2aaaafe24000 r-xp 00000000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaaafe24000-2aaab0023000 ---p 00007000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0023000-2aaab0024000 r--p 00006000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0024000-2aaab0025000 rw-p 00007000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0025000-2aaab003c000 r-xp 00000000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab003c000-2aaab023b000 ---p 00017000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023b000-2aaab023c000 r--p 00016000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023c000-2aaab023d000 rw-p 00017000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023d000-2aaab0241000 rw-p 00000000 00:00 0 
+2aaab0241000-2aaab0243000 r-xp 00000000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0243000-2aaab0443000 ---p 00002000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0443000-2aaab0444000 r--p 00002000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0444000-2aaab0445000 rw-p 00003000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0445000-2aaab05b9000 r-xp 00000000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab05b9000-2aaab07b9000 ---p 00174000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07b9000-2aaab07c3000 r--p 00174000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07c3000-2aaab07c5000 rw-p 0017e000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07c5000-2aaab07c9000 rw-p 00000000 00:00 0 
+2aaab07c9000-2aaab08ca000 r-xp 00000000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab08ca000-2aaab0ac9000 ---p 00101000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0ac9000-2aaab0aca000 r--p 00100000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0aca000-2aaab0acb000 rw-p 00101000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0acb000-2aaab0ae2000 r-xp 00000000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ae2000-2aaab0ce1000 ---p 00017000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce1000-2aaab0ce2000 r--p 00016000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce2000-2aaab0ce3000 rw-p 00017000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce3000-2aaab0ea7000 r-xp 00000000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab0ea7000-2aaab10a6000 ---p 001c4000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10a6000-2aaab10aa000 r--p 001c3000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10aa000-2aaab10ac000 rw-p 001c7000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10ac000-2aaab10b1000 rw-p 00000000 00:00 0 
+2aaab10b1000-2aaab3397000 r-xp 00000000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3397000-2aaab3597000 ---p 022e6000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3597000-2aaab3609000 rw-p 022e6000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3609000-2aaab3611000 rw-p 00000000 00:00 0 
+2aaab3611000-2aaab375f000 r-xp 00000000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab375f000-2aaab395f000 ---p 0014e000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab395f000-2aaab39ab000 r--p 0014e000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab39ab000-2aaab39ac000 rw-p 0019a000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab39ac000-2aaab4593000 rw-p 00000000 00:00 0 
+2aaab4593000-2aaab4667000 r--p 00000000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab4667000-2aaab4ad1000 r-xp 000d4000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab4ad1000-2aaab587c000 r--p 0053e000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab587c000-2aaab587d000 ---p 012e9000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab587d000-2aaab5892000 r--p 012e9000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab5892000-2aaab5998000 rw-p 012fe000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab5998000-2aaab59f7000 rw-p 00000000 00:00 0 
+2aaab59f7000-2aaabb9f7000 ---p 00000000 00:00 0 
+2aaabb9f7000-2aaabb9f8000 ---p 00000000 00:00 0 
+2aaabb9f8000-2aaabbbf8000 rw-p 00000000 00:00 0 
+2aaabbbf8000-2aaabbbf9000 ---p 00000000 00:00 0 
+2aaabbbf9000-2aaabbefb000 rw-p 00000000 00:00 0 
+2aaabc000000-2aaabc400000 ---p 00000000 00:00 0 
+2aaabc400000-2aaabc600000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabc600000-2aaabc800000 rw-s 00000000 00:04 115660447                  /dev/zero (deleted)
+2aaabc800000-2aaabca00000 rw-s 00000000 00:04 115660448                  /dev/zero (deleted)
+2aaabca00000-2aaabd000000 ---p 00000000 00:00 0 
+2aaabd000000-2aaabd200000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabd200000-2aaabd400000 rw-s 00000000 00:04 115660451                  /dev/zero (deleted)
+2aaabd400000-2aaabd4e7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabd4e7000-2aaabe000000 ---p 00000000 00:00 0 
+2aaabe000000-2aaabe200000 rw-s 00000000 00:04 115660450                  /dev/zero (deleted)
+2aaabe200000-2aaabe311000 rw-p 00000000 00:00 0 
+2aaac0000000-2aaad0000000 ---p 00000000 00:00 0 
+2aaad0000000-2aaad0021000 rw-p 00000000 00:00 0 
+2aaad0021000-2aaad4000000 ---p 00000000 00:00 0 
+2aaad4000000-2aaad4021000 rw-p 00000000 00:00 0 
+2aaad4021000-2aaad8000000 ---p 00000000 00:00 0 
+2aaad8000000-2aaae2000000 ---p 00000000 00:00 0 
+2aaae4000000-2aaae4021000 rw-p 00000000 00:00 0 
+2aaae4021000-2aaae8000000 ---p 00000000 00:00 0 
+7ffffffd4000-7ffffffff000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+/var/spool/torque/mom_priv/jobs/11084.sched-pace-ice.pace.gatech.edu.SC: line 26: 158179 Aborted                 (core dumped) ./simplex > myoutput.log
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+main.cu(193): warning: variable "k_d" was declared but never referenced
+
+*** Error in `./simplex': corrupted size vs. prev_size: 0x00000000006ba7b0 ***
+======= Backtrace: =========
+/lib64/libc.so.6(+0x80c37)[0x2aaab0d63c37]
+/lib64/libc.so.6(+0x82135)[0x2aaab0d65135]
+/lib64/libc.so.6(__libc_calloc+0xb4)[0x2aaab0d69214]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x5ae865)[0x2aaaab711865]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x5aea00)[0x2aaaab711a00]
+/lib64/libc.so.6(__cxa_finalize+0x9a)[0x2aaab0d1d05a]
+/usr/local/pace-apps/manual/packages/cuda/10.1/lib64/libcublas.so.10(+0x28056)[0x2aaaab18b056]
+======= Memory map: ========
+00400000-00418000 r-xp 00000000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+00618000-00619000 r--p 00018000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+00619000-0061a000 rw-p 00019000 00:2a 2138992814                         /storage/home/hpaceice1/akatoch3/6679Project/simplex
+0061a000-00e06000 rw-p 00000000 00:00 0                                  [heap]
+200000000-200200000 ---p 00000000 00:00 0 
+200200000-200400000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+200400000-200600000 rw-s 00000000 00:05 13724                            /dev/nvidia2
+200600000-203e00000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+203e00000-204c00000 ---p 00000000 00:00 0 
+204c00000-204e00000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+204e00000-205000000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205000000-205200000 rw-s 205000000 00:05 1386                            /dev/nvidia-uvm
+205200000-205400000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205400000-205600000 ---p 00000000 00:00 0 
+205600000-205800000 rw-s 00000000 00:05 13672                            /dev/nvidiactl
+205800000-205a00000 rw-s 00000000 00:04 115623784                        /dev/zero (deleted)
+205a00000-300200000 ---p 00000000 00:00 0 
+10000000000-10004000000 ---p 00000000 00:00 0 
+2aaaaaaab000-2aaaaaacd000 r-xp 00000000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaaacd000-2aaaaaacf000 r-xp 00000000 00:00 0                          [vdso]
+2aaaaaacf000-2aaaaaad3000 rw-p 00000000 00:00 0 
+2aaaaaad3000-2aaaaaae3000 -w-s 00000000 00:05 13724                      /dev/nvidia2
+2aaaaaae3000-2aaaaaae4000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae4000-2aaaaaae5000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae5000-2aaaaaae6000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae6000-2aaaaaae7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae7000-2aaaaaae8000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae8000-2aaaaaae9000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaae9000-2aaaaaaea000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaea000-2aaaaaaeb000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaeb000-2aaaaaaec000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaec000-2aaaaaaed000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaed000-2aaaaaaee000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaee000-2aaaaaaef000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaef000-2aaaaaaf0000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf0000-2aaaaaaf1000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf1000-2aaaaaaf2000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf2000-2aaaaaaf3000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf3000-2aaaaaaf4000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf4000-2aaaaaaf5000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf5000-2aaaaaaf6000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf6000-2aaaaaaf7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaaaaaf7000-2aaaaac8f000 rw-p 00000000 00:00 0 
+2aaaaaccc000-2aaaaaccd000 r--p 00021000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaaccd000-2aaaaacce000 rw-p 00022000 fd:00 4457770                    /usr/lib64/ld-2.17.so
+2aaaaacce000-2aaaaaccf000 rw-p 00000000 00:00 0 
+2aaaaaccf000-2aaaaace4000 r-xp 00000000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaace4000-2aaaaaee4000 ---p 00015000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee4000-2aaaaaee5000 r--p 00015000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee5000-2aaaaaee6000 rw-p 00016000 00:2b 2083393555                 /storage/pace-apps/manual/packages/xalt/2.8.4/lib64/libxalt_init.so
+2aaaaaee6000-2aaaaaee7000 rw-p 00000000 00:00 0 
+2aaaaaee7000-2aaaaaf5e000 r-xp 00000000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaaaf5e000-2aaaab15e000 ---p 00077000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaab15e000-2aaaab162000 rw-p 00077000 00:2b 2087385240                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcudart.so.10.1.105
+2aaaab162000-2aaaab163000 rw-p 00000000 00:00 0 
+2aaaab163000-2aaaafc06000 r-xp 00000000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafc06000-2aaaafe05000 ---p 04aa3000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafe05000-2aaaafe13000 rw-p 04aa2000 00:2b 2101561477                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublas.so.10.1.0.105
+2aaaafe13000-2aaaafe1d000 rw-p 00000000 00:00 0 
+2aaaafe1d000-2aaaafe24000 r-xp 00000000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaaafe24000-2aaab0023000 ---p 00007000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0023000-2aaab0024000 r--p 00006000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0024000-2aaab0025000 rw-p 00007000 fd:00 4457785                    /usr/lib64/librt-2.17.so
+2aaab0025000-2aaab003c000 r-xp 00000000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab003c000-2aaab023b000 ---p 00017000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023b000-2aaab023c000 r--p 00016000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023c000-2aaab023d000 rw-p 00017000 fd:00 112263                     /usr/lib64/libpthread-2.17.so
+2aaab023d000-2aaab0241000 rw-p 00000000 00:00 0 
+2aaab0241000-2aaab0243000 r-xp 00000000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0243000-2aaab0443000 ---p 00002000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0443000-2aaab0444000 r--p 00002000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0444000-2aaab0445000 rw-p 00003000 fd:00 2389                       /usr/lib64/libdl-2.17.so
+2aaab0445000-2aaab05b9000 r-xp 00000000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab05b9000-2aaab07b9000 ---p 00174000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07b9000-2aaab07c3000 r--p 00174000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07c3000-2aaab07c5000 rw-p 0017e000 00:2b 2083791082                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libstdc++.so.6.0.25
+2aaab07c5000-2aaab07c9000 rw-p 00000000 00:00 0 
+2aaab07c9000-2aaab08ca000 r-xp 00000000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab08ca000-2aaab0ac9000 ---p 00101000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0ac9000-2aaab0aca000 r--p 00100000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0aca000-2aaab0acb000 rw-p 00101000 fd:00 4457773                    /usr/lib64/libm-2.17.so
+2aaab0acb000-2aaab0ae2000 r-xp 00000000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ae2000-2aaab0ce1000 ---p 00017000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce1000-2aaab0ce2000 r--p 00016000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce2000-2aaab0ce3000 rw-p 00017000 00:2b 2082936003                 /storage/pace-apps/spack/packages/0.12/linux-rhel7-x86_64/gcc-4.8.5/gcc-8.3.0-opnwtdjumg2hxo4ljvnx77ugb6afmvj3/lib64/libgcc_s.so.1
+2aaab0ce3000-2aaab0ea7000 r-xp 00000000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab0ea7000-2aaab10a6000 ---p 001c4000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10a6000-2aaab10aa000 r--p 001c3000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10aa000-2aaab10ac000 rw-p 001c7000 fd:00 2381                       /usr/lib64/libc-2.17.so
+2aaab10ac000-2aaab10b1000 rw-p 00000000 00:00 0 
+2aaab10b1000-2aaab3397000 r-xp 00000000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3397000-2aaab3597000 ---p 022e6000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3597000-2aaab3609000 rw-p 022e6000 00:2b 2101561480                 /storage/pace-apps/manual/packages/cuda/10.1/targets/x86_64-linux/lib/libcublasLt.so.10.1.0.105
+2aaab3609000-2aaab3611000 rw-p 00000000 00:00 0 
+2aaab3611000-2aaab375f000 r-xp 00000000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab375f000-2aaab395f000 ---p 0014e000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab395f000-2aaab39ab000 r--p 0014e000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab39ab000-2aaab39ac000 rw-p 0019a000 fd:00 6883920                    /usr/lib64/libnvidia-ml.so.515.65.01
+2aaab39ac000-2aaab4593000 rw-p 00000000 00:00 0 
+2aaab4593000-2aaab4667000 r--p 00000000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab4667000-2aaab4ad1000 r-xp 000d4000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab4ad1000-2aaab587c000 r--p 0053e000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab587c000-2aaab587d000 ---p 012e9000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab587d000-2aaab5892000 r--p 012e9000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab5892000-2aaab5998000 rw-p 012fe000 fd:00 277018                     /usr/lib64/libcuda.so.515.65.01
+2aaab5998000-2aaab59f7000 rw-p 00000000 00:00 0 
+2aaab59f7000-2aaabb9f7000 ---p 00000000 00:00 0 
+2aaabb9f7000-2aaabb9f8000 ---p 00000000 00:00 0 
+2aaabb9f8000-2aaabbbf8000 rw-p 00000000 00:00 0 
+2aaabbbf8000-2aaabbbf9000 ---p 00000000 00:00 0 
+2aaabbbf9000-2aaabbefb000 rw-p 00000000 00:00 0 
+2aaabc000000-2aaabc400000 ---p 00000000 00:00 0 
+2aaabc400000-2aaabc600000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabc600000-2aaabc800000 rw-s 00000000 00:04 115623782                  /dev/zero (deleted)
+2aaabc800000-2aaabca00000 rw-s 00000000 00:04 115623783                  /dev/zero (deleted)
+2aaabca00000-2aaabd000000 ---p 00000000 00:00 0 
+2aaabd000000-2aaabd200000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabd200000-2aaabd400000 rw-s 00000000 00:04 115623786                  /dev/zero (deleted)
+2aaabd400000-2aaabd4e7000 rw-s 00000000 00:05 13672                      /dev/nvidiactl
+2aaabd4e7000-2aaabe000000 ---p 00000000 00:00 0 
+2aaabe000000-2aaabe200000 rw-s 00000000 00:04 115623785                  /dev/zero (deleted)
+2aaabe200000-2aaabe311000 rw-p 00000000 00:00 0 
+2aaac0000000-2aaad0000000 ---p 00000000 00:00 0 
+2aaad0000000-2aaad0021000 rw-p 00000000 00:00 0 
+2aaad0021000-2aaad4000000 ---p 00000000 00:00 0 
+2aaad4000000-2aaad4021000 rw-p 00000000 00:00 0 
+2aaad4021000-2aaad8000000 ---p 00000000 00:00 0 
+2aaad8000000-2aaae2000000 ---p 00000000 00:00 0 
+2aaae4000000-2aaae4021000 rw-p 00000000 00:00 0 
+2aaae4021000-2aaae8000000 ---p 00000000 00:00 0 
+7ffffffd4000-7ffffffff000 rw-p 00000000 00:00 0                          [stack]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+/var/spool/torque/mom_priv/jobs/11086.sched-pace-ice.pace.gatech.edu.SC: line 26: 158958 Aborted                 (core dumped) ./simplex > myoutput.log
