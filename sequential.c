@@ -105,15 +105,15 @@ int main(int argc, char**argv) {
 	}   
     }	
 
-// //////////////////////////////////////////////////        
-//     for (int i = 0; i < m+1; i++) {
-//         for (int j = 0; j < n+1; j++) {
-//             printf("%.1f ", tab[i][j]);
-//         }
-//         printf("\n");        
-//     }
-//     printf("\n");
-// //////////////////////////////////////////////////
+//////////////////////////////////////////////////        
+    for (int i = 0; i < m+1; i++) {
+        for (int j = 0; j < n+1; j++) {
+            printf("%.1f ", tab[i][j]);
+        }
+        printf("\n");        
+    }
+    printf("\n");
+//////////////////////////////////////////////////
     int kIndex;
     bool continueVar = true;
     while (continueVar == true) {
@@ -172,6 +172,16 @@ int main(int argc, char**argv) {
             tab[rIndex][i] = tab[rIndex][i] / divider;
         }
         
+        //////////////////////////////////////////////////        
+        for (int i = 0; i < m+1; i++) {
+            for (int j = 0; j < n+1; j++) {
+                printf("%.1f ", tab[i][j]);
+            }
+            printf("\n");        
+        }
+        printf("\n");
+        //////////////////////////////////////////////////
+
         // Calculate new values rest of tableau
         double holderTab[m+1][n+1];
         for (unsigned int i=0; i < m+1; i++) {
@@ -189,7 +199,15 @@ int main(int argc, char**argv) {
                 tab[i][j] = holderTab[i][j];
             }
         }
-
+        //////////////////////////////////////////////////        
+        for (int i = 0; i < m+1; i++) {
+            for (int j = 0; j < n+1; j++) {
+                printf("%.1f ", tab[i][j]);
+            }
+            printf("\n");        
+        }
+        printf("\n");
+        //////////////////////////////////////////////////
         double w = colK[rIndex];
         for (unsigned int i=0; i < n+1; i++) {
             if (i!=rIndex) {
@@ -199,16 +217,16 @@ int main(int argc, char**argv) {
                 tab[i][kIndex] = 1/w;
             }
         }
-// ////////////////////////////////////////////////        
-//       for (int i = 0; i < m+1; i++) {
-//            for (int j = 0; j < n+1; j++) {
-//                printf("%.1f ", tab[i][j]);
-//            }
-//            printf("\n");        
-//        }
-//        printf("\n");
-//        printf("iteration end\n\n");
-// ////////////////////////////////////////////////
+////////////////////////////////////////////////        
+      for (int i = 0; i < m+1; i++) {
+           for (int j = 0; j < n+1; j++) {
+               printf("%.1f ", tab[i][j]);
+           }
+           printf("\n");        
+       }
+       printf("\n");
+       printf("iteration end\n\n");
+////////////////////////////////////////////////
     }
     ////////////////////////////////////////////////        
       for (int i = 0; i < m+1; i++) {
