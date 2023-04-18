@@ -4,6 +4,7 @@
 #include "kernel3.cu"
 #include "kernel4.cu"
 #include "support.h"
+#include <time.h>
 void printMatrix(double *m, int r, int c) {
   for (int i = 0; i < r; i++)
     {
@@ -26,6 +27,7 @@ void printMatrix2(double **m, int r, int c) {
 }
 
 int main(int argc, char**argv) {
+    float clockParallelizedStart = clock();
     if (argc != 4) {
         return 0;
     }
@@ -273,7 +275,7 @@ int main(int argc, char**argv) {
             }
         }
         if (minValue>=0) {
-            printf("Optimal Value");
+            printf("Optimal Value\n");
             continueVar = false;
             break;
         } else {
@@ -285,8 +287,7 @@ int main(int argc, char**argv) {
 
 
         cudaDeviceSynchronize();
-	printMatrix(tab_h, m+1, n+1);
-	printf("\n");
+	
         // Kernel 1 to process ratio column
 
         const unsigned int numBlocks1 = m/THREADS_PER_BLOCK + 1;
@@ -315,7 +316,7 @@ int main(int argc, char**argv) {
             }
         }
         if (minValue==10000.0) {
-            printf("unbounded");
+            printf("unbounded\n");
             continueVar = false;
             break;
         } else {
@@ -336,8 +337,7 @@ int main(int argc, char**argv) {
 	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 	
-	printMatrix(tab_h, m+1,	 n+1);
-	printf("\n");
+	
 	cuda_ret = cudaMemcpy(tab_d, tab_h, sizeof(double)*(m+1)*(n+1), cudaMemcpyHostToDevice);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 	
@@ -353,15 +353,14 @@ int main(int argc, char**argv) {
         dim3 gridDim3(numBlocksX3, numBlocksY3), blockDim3(THREADS_PER_BLOCK, THREADS_PER_BLOCK);
 	
         kernel3<<<gridDim3, blockDim3>>>(tab_d, columnk_d, k_h, r_h, n, m);
-	printf("\n");
+	
         cudaDeviceSynchronize();
 	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
 
 
 
-	printMatrix(tab_h, m+1,n+1);
-	printf("\n");
+	
         // Kernel 4 to Update column k of the Simplex Tableau
 	cuda_ret = cudaMemcpy(tab_d, tab_h, sizeof(double)*(m+1)*(n+1), cudaMemcpyHostToDevice);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");	
@@ -383,11 +382,14 @@ int main(int argc, char**argv) {
         cudaDeviceSynchronize();
     	cuda_ret = cudaMemcpy(tab_h, tab_d, sizeof(double)*(m+1)*(n+1), cudaMemcpyDeviceToHost);
         if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to device");
-       	printMatrix(tab_h, m+1, n+1);
-	printf("############################################\n");
+       	
+
     }
+    printf("%f\n", tab_h[0]);
     // Calculate optimal value and return it
     //cuda_ret = cudaMemcpy(objLine_h, objLine_d, sizeof(double)*n, cudaMemcpyDeviceToHost);
     //if(cuda_ret != cudaSuccess) FATAL("Unable to copy memory to host");
-    
+    float clockParallelizedEnd = clock();    
+    float parallelizedTime = (float)(clockParallelizedEnd - clockParallelizedStart)/CLOCKS_PER_SEC;
+    printf("%f\n",parallelizedTime);
 }

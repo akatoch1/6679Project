@@ -1,8 +1,8 @@
 # Request 10 minutes of wall-clock time.
-#PBS -l walltime=5:00
+#PBS -l walltime=1:00:00
 
 # Request 4 cores on any available nodes.
-#PBS -l nodes=atl1-1-01-005-7.pace.gatech.edu:ppn=4:gpus=1
+#PBS -l nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
 
 # 4 cores x 8 gb per core = 32 gb total. That's plenty for a large matrix.
 #PBS -l pmem=8gb
@@ -23,6 +23,12 @@ cd /storage/home/hpaceice1/akatoch3/6679Project
 #make
 make
 # Run the code
-./simplex 10 10 15 > myoutput.log
+./simplex 5 5 0 > myoutput.log
 
+./simplex 10 10 1 >> myoutput.log
 
+./simplex 50 50 2 >> myoutput.log
+
+./simplex 100 100 3 >> myoutput.log
+
+./simplex 500 500 4 >> myoutput.log

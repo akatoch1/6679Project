@@ -14,3 +14,85 @@ main.cu(225): warning: variable "k_d" was declared but never referenced
 
 =>> PBS: job killed: walltime 325 exceeded limit 300
 =>> PBS: job killed: walltime 316 exceeded limit 300
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+
+real	0m0.437s
+user	0m0.026s
+sys	0m0.122s
+
+real	0m0.139s
+user	0m0.021s
+sys	0m0.105s
+
+real	0m0.157s
+user	0m0.038s
+sys	0m0.106s
+
+real	0m0.277s
+user	0m0.142s
+sys	0m0.121s
+
+real	0m2.397s
+user	0m2.085s
+sys	0m0.295s
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+main.cu(225): warning: variable "k_d" was declared but never referenced
+
+
+real	0m0.389s
+user	0m0.021s
+sys	0m0.115s
+
+real	0m0.139s
+user	0m0.026s
+sys	0m0.101s
+
+real	0m0.160s
+user	0m0.030s
+sys	0m0.111s
+
+real	0m0.275s
+user	0m0.128s
+sys	0m0.135s
+
+real	0m0.647s
+user	0m0.508s
+sys	0m0.124s
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+
+main.cu(227): warning: variable "k_d" was declared but never referenced
+

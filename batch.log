@@ -2950,3 +2950,111 @@ Nodes:
 atl1-1-02-012-9-r.pace.gatech.edu
 End PBS Epilogue Mon Apr 17 18:34:14 EDT 2023
 ---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Apr 17 20:50:29 EDT 2023
+Job ID:     11293.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Queue:      pace-ice-gpu
+End PBS Prologue Mon Apr 17 20:50:29 EDT 2023
+---------------------------------------
+make: Nothing to be done for `all'.
+---------------------------------------
+Begin PBS Epilogue Mon Apr 17 20:50:31 EDT 2023
+Job ID:     11293.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Resources:  walltime=00:05:00,nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1,pmem=8gb,neednodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
+Rsrc Used:  cput=00:00:00,vmem=0kb,walltime=00:00:03,mem=0kb,energy_used=0
+Queue:      pace-ice-gpu
+Nodes:     
+atl1-1-01-005-5.pace.gatech.edu
+End PBS Epilogue Mon Apr 17 20:50:46 EDT 2023
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Apr 17 21:12:40 EDT 2023
+Job ID:     11299.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Queue:      pace-ice-gpu
+End PBS Prologue Mon Apr 17 21:12:40 EDT 2023
+---------------------------------------
+nvcc -c -o main.o main.cu -O3 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_37,code=sm_37  -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=\"sm_70,compute_70\" -gencode arch=compute_75,code=\"sm_75,compute_75\" -Xcompiler -march=native -c --std=c++03 -DWITH_CUBLAS -I /usr/local/pace-apps/manual/packages/cuda/10.1/include
+nvcc main.o  -L/usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -lcudart -lcublas -L /usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -Xcompiler \"-Wl,-rpath,/usr/local/pace-apps/manual/packages/cuda/10.1/lib64\" -o simplex
+---------------------------------------
+Begin PBS Epilogue Mon Apr 17 21:12:50 EDT 2023
+Job ID:     11299.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Resources:  walltime=01:00:00,nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1,pmem=8gb,neednodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
+Rsrc Used:  cput=00:00:06,vmem=0kb,walltime=00:00:10,mem=0kb,energy_used=0
+Queue:      pace-ice-gpu
+Nodes:     
+atl1-1-01-005-5.pace.gatech.edu
+End PBS Epilogue Mon Apr 17 21:13:12 EDT 2023
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Apr 17 21:30:46 EDT 2023
+Job ID:     11308.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Queue:      pace-ice-gpu
+End PBS Prologue Mon Apr 17 21:30:46 EDT 2023
+---------------------------------------
+nvcc -c -o main.o main.cu -O3 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_37,code=sm_37  -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=\"sm_70,compute_70\" -gencode arch=compute_75,code=\"sm_75,compute_75\" -Xcompiler -march=native -c --std=c++03 -DWITH_CUBLAS -I /usr/local/pace-apps/manual/packages/cuda/10.1/include
+nvcc main.o  -L/usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -lcudart -lcublas -L /usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -Xcompiler \"-Wl,-rpath,/usr/local/pace-apps/manual/packages/cuda/10.1/lib64\" -o simplex
+---------------------------------------
+Begin PBS Epilogue Mon Apr 17 21:30:53 EDT 2023
+Job ID:     11308.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Resources:  walltime=01:00:00,nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1,pmem=8gb,neednodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
+Rsrc Used:  cput=00:00:05,vmem=0kb,walltime=00:00:08,mem=0kb,energy_used=0
+Queue:      pace-ice-gpu
+Nodes:     
+atl1-1-01-005-5.pace.gatech.edu
+End PBS Epilogue Mon Apr 17 21:31:14 EDT 2023
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Apr 17 21:56:05 EDT 2023
+Job ID:     11314.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Queue:      pace-ice-gpu
+End PBS Prologue Mon Apr 17 21:56:05 EDT 2023
+---------------------------------------
+nvcc -c -o main.o main.cu -O3 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_37,code=sm_37  -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=\"sm_70,compute_70\" -gencode arch=compute_75,code=\"sm_75,compute_75\" -Xcompiler -march=native -c --std=c++03 -DWITH_CUBLAS -I /usr/local/pace-apps/manual/packages/cuda/10.1/include
+nvcc main.o  -L/usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -lcudart -lcublas -L /usr/local/pace-apps/manual/packages/cuda/10.1/lib64 -Xcompiler \"-Wl,-rpath,/usr/local/pace-apps/manual/packages/cuda/10.1/lib64\" -o simplex
+---------------------------------------
+Begin PBS Epilogue Mon Apr 17 21:56:12 EDT 2023
+Job ID:     11314.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Resources:  walltime=01:00:00,nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1,pmem=8gb,neednodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
+Rsrc Used:  cput=00:00:05,vmem=436148kb,walltime=00:00:08,mem=26720kb,energy_used=0
+Queue:      pace-ice-gpu
+Nodes:     
+atl1-1-01-005-5.pace.gatech.edu
+End PBS Epilogue Mon Apr 17 21:56:33 EDT 2023
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Apr 17 21:59:10 EDT 2023
+Job ID:     11316.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Queue:      pace-ice-gpu
+End PBS Prologue Mon Apr 17 21:59:10 EDT 2023
+---------------------------------------
+make: Nothing to be done for `all'.
+---------------------------------------
+Begin PBS Epilogue Mon Apr 17 21:59:15 EDT 2023
+Job ID:     11316.sched-pace-ice.pace.gatech.edu
+User ID:    akatoch3
+Job name:   run.pbs
+Resources:  walltime=01:00:00,nodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1,pmem=8gb,neednodes=atl1-1-01-005-5.pace.gatech.edu:ppn=4:gpus=1
+Rsrc Used:  cput=00:00:03,vmem=0kb,walltime=00:00:05,mem=0kb,energy_used=0
+Queue:      pace-ice-gpu
+Nodes:     
+atl1-1-01-005-5.pace.gatech.edu
+End PBS Epilogue Mon Apr 17 21:59:15 EDT 2023
+---------------------------------------
