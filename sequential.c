@@ -6,6 +6,7 @@
 #include <math.h>
 
 int main(int argc, char**argv) {
+    clock_t clockStart = clock();
     if (argc != 4) {
         return 0;
     }
@@ -98,7 +99,6 @@ int main(int argc, char**argv) {
 	}
 	svec[i] = sum;
     }   
-
     
     double tab[m+1][n+1];
 
@@ -161,7 +161,6 @@ int main(int argc, char**argv) {
         for (unsigned int i=0; i < m+1; i++) {
             colK[i] = tab[i][kIndex];
         }
-
 
         // Calculate the theta values
         double theta[m];
