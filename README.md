@@ -1,8 +1,8 @@
-This is a simple example for vector addition on a CUDA GPU. Instructions:
+This is the simplex algorithm parallelized. Instructions:
 
 1) load the cuda module
 2) compile
-3) submit the job to PBS to run
+3) submit the job to PBS to run. Can also run on your own hardware if you have an nvidia gpu
 
 ### Basic usage:
 
